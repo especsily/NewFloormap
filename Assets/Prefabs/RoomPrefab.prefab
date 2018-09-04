@@ -342,6 +342,7 @@ MonoBehaviour:
   iconColor: {r: 1, g: 0.44705883, b: 0, a: 1}
   name: "Ph\xF2ng 1"
   info: "Ph\xF2ng cho thu\xEA / Ph\xF2ng h\u1ECDc"
+  iconFrameColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114507231402139410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -709,7 +710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 153, y: -74}
+  m_AnchoredPosition: {x: 283.6, y: -250}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224177316311186910
