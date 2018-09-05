@@ -38,7 +38,7 @@ public class RoomInfoCanvas : MonoBehaviour{
         iconFrame.color = iconColor;
         iconFrame1.color = iconColor;
 
-        roomName.text = name;
+        roomName.text = nameText;
         roomInfo.text = infoText;
         
         iconFrameColor = iconColor;

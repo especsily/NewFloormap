@@ -153,6 +153,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
                 }
 
                 //fill info
+                
                 if (info != "")
                     listRoomInfo[i].roomInfo.text = info.Trim();
                 if (roomInfo != null)
