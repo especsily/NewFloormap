@@ -146,8 +146,6 @@ public class NavigationManager : MonoBehaviour, INavigation
 
                 var trail = pointer.GetComponent<Pointer>().trail;
                 trail.time = trailTime;
-                // trail.startWidth = trailStartWidth;
-                // trail.endWidth = trailEndWidth;
 
                 listPointer.Add(pointer);
             }
@@ -185,11 +183,7 @@ public class NavigationManager : MonoBehaviour, INavigation
             for (int i = 0; i < highlightFloors.Count; i++)
             {
                 var floor = highlightFloors[i].GetComponent<Floor>();
-                // highlightMaterial.color = floorColor;
 
-                // Material mt = floor.mesh.sharedMaterial;
-                // Material mt = new Material(floor.mesh.sharedMaterial);
-                // mt.color = floorColor;\
                 Material mt = null;
                 if (roomID.Contains("Room") || roomID.Contains("OpenSpace"))
                 {
@@ -218,10 +212,6 @@ public class NavigationManager : MonoBehaviour, INavigation
                     mt.EnableKeyword("_EMISSION");
                     floor.mesh.sharedMaterial = mt;
                 }
-                // floor.mesh.sharedMaterial = mt;
-                // floor.mesh.sharedMaterial.SetColor("_EmissionColor", floorColor);
-
-                // floor.mesh.sharedMaterial.color = floorColor;
             }
         }
     }
@@ -233,16 +223,6 @@ public class NavigationManager : MonoBehaviour, INavigation
             for (int i = 0; i < highlightFloors.Count; i++)
             {
                 highlightFloors[i].GetComponent<Floor>().mesh.sharedMaterial = lastMaterial;
-                // var floor = highlightFloors[i].GetComponent<Floor>();
-                // var mt = floor.mesh.sharedMaterial;
-                // // mt.color = lastColor;
-                // mt.DisableKeyword("_EMISSION");
-                // mt.SetColor("_EmissionColor", Color.green);
-
-                // var floor = highlightFloors[i].GetComponent<Floor>();
-                // Material mt = floor.mesh.sharedMaterial;
-                // mt.DisableKeyword("_EMISSION");
-                // mt.color = lastColor;
             }
         }
     }

@@ -70,10 +70,10 @@ public class RoomInfoCanvas : MonoBehaviour
         infoIconPin.gameObject.SetActive(true);
         transform.SetAsLastSibling();
 
-        sequence.Append(infoFrame.transform.DOScaleX(1f, 0.3f).SetEase(Ease.Linear));
-        sequence.Join(infoFrame.transform.DOScaleY(1f, 0.3f).SetEase(Ease.Linear));
-        sequence.Join(infoTop.transform.DOLocalMoveY(74, 0.3f).SetEase(Ease.Linear));
-        sequence.Join(iconFrame1.transform.DOLocalMoveY(74, 0.3f).SetEase(Ease.Linear));
+        sequence.Append(infoFrame.transform.DOScaleX(1f, 0.15f).SetEase(Ease.Linear));
+        sequence.Join(infoFrame.transform.DOScaleY(1f, 0.15f).SetEase(Ease.Linear));
+        sequence.Join(infoTop.transform.DOLocalMoveY(74, 0.15f).SetEase(Ease.Linear));
+        sequence.Join(iconFrame1.transform.DOLocalMoveY(74, 0.15f).SetEase(Ease.Linear));
         sequence.Play();
         sequence.OnComplete(() => isShowing = false);
     }
@@ -88,16 +88,12 @@ public class RoomInfoCanvas : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(infoFrame.transform.DOScaleY(0, 0.32f).SetEase(Ease.Linear));
         sequence.Join(infoFrame.transform.DOScaleX(0, 0.32f).SetEase(Ease.Linear));
-        sequence.Join(infoTop.transform.DOLocalMoveY(22.8f, 0.3f).SetEase(Ease.Linear));
-        // sequence.Join(infoTop.DOColor(iconFrameColor, 0.3f));
-        // sequence.Join(infoBot.DOColor(iconFrameColor, 0.3f));
-        sequence.Join(iconFrame1.transform.DOLocalMoveY(22.8f, 0.3f).SetEase(Ease.Linear));
+        sequence.Join(infoTop.transform.DOLocalMoveY(22.8f, 0.15f).SetEase(Ease.Linear));
+        sequence.Join(iconFrame1.transform.DOLocalMoveY(22.8f, 0.15f).SetEase(Ease.Linear));
 
         sequence.OnComplete(() =>
         {
-                // isShowing = false;
-                // frame.gameObject.SetActive(false);
-                iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 1);
+            iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 1);
             icon.color = Color.white;
 
             infoIconPin.gameObject.SetActive(false);
