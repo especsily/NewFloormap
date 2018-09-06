@@ -60,42 +60,40 @@ public class RoomInfoCanvas : MonoBehaviour
         navigationManager.ShowNavigation(roomID);
         navigationManager.ShowHighlightFloor(roomID, iconColor);
 
-        var sequence = DOTween.Sequence();
-
         //turn off icon
-        iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
-        icon.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
+        // iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
+        // icon.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
+        iconFrame.gameObject.SetActive(false);
 
         //turn on info
         infoIconPin.gameObject.SetActive(true);
         transform.SetAsLastSibling();
 
-        sequence.Append(infoFrame.transform.DOScaleX(1f, 0.15f).SetEase(Ease.Linear));
-        sequence.Join(infoFrame.transform.DOScaleY(1f, 0.15f).SetEase(Ease.Linear));
-        sequence.Join(infoTop.transform.DOLocalMoveY(74, 0.15f).SetEase(Ease.Linear));
-        sequence.Join(iconFrame1.transform.DOLocalMoveY(74, 0.15f).SetEase(Ease.Linear));
+        var sequence = DOTween.Sequence();
+        sequence.Append(infoFrame.transform.DOScaleX(1f, 0.15f));
+        sequence.Join(infoFrame.transform.DOScaleY(1f, 0.15f));
+        sequence.Join(infoTop.transform.DOLocalMoveY(74, 0.15f));
+        sequence.Join(iconFrame1.transform.DOLocalMoveY(74, 0.15f));
         sequence.Play();
-        sequence.OnComplete(() => isShowing = false);
     }
 
     public void MouseExit()
     {
-
         DOTween.CompleteAll();
         navigationManager.StopNavigation();
         navigationManager.StopHighlightFloor();
 
         var sequence = DOTween.Sequence();
-        sequence.Append(infoFrame.transform.DOScaleY(0, 0.32f).SetEase(Ease.Linear));
-        sequence.Join(infoFrame.transform.DOScaleX(0, 0.32f).SetEase(Ease.Linear));
-        sequence.Join(infoTop.transform.DOLocalMoveY(22.8f, 0.15f).SetEase(Ease.Linear));
-        sequence.Join(iconFrame1.transform.DOLocalMoveY(22.8f, 0.15f).SetEase(Ease.Linear));
+        sequence.Append(infoFrame.transform.DOScaleY(0, 0.15f));
+        sequence.Join(infoFrame.transform.DOScaleX(0, 0.15f));
+        sequence.Join(infoTop.transform.DOLocalMoveY(22.8f, 0.15f));
+        sequence.Join(iconFrame1.transform.DOLocalMoveY(22.8f, 0.15f));
 
         sequence.OnComplete(() =>
         {
-            iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 1);
-            icon.color = Color.white;
-
+            // iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 1);
+            // icon.color = Color.white;
+            
             infoIconPin.gameObject.SetActive(false);
             iconFrame.gameObject.SetActive(true);
             transform.SetAsFirstSibling();

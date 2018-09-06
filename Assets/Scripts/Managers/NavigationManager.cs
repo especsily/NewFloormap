@@ -156,11 +156,13 @@ public class NavigationManager : MonoBehaviour, INavigation
     {
         beginArrow.gameObject.SetActive(true);
         isShowPointer = false;
-        timer = 0;
         for (int i = 0; i < listPointer.Count; i++)
         {
-            listPointer[i].GetComponent<Pointer>().trail.Clear();
-            listPointer[i].gameObject.SetActive(false);
+            if (listPointer[i].activeSelf)
+            {
+                listPointer[i].gameObject.SetActive(false);
+                listPointer[i].GetComponent<Pointer>().trail.Clear();
+            }
         }
     }
 
@@ -179,7 +181,6 @@ public class NavigationManager : MonoBehaviour, INavigation
         if (highlightFloors.Count > 0)
         {
             lastMaterial = highlightFloors[0].GetComponent<Floor>().mesh.sharedMaterial;
-            // lastColor = highlightFloors[0].GetComponent<Floor>().mesh.sharedMaterial.color;
             for (int i = 0; i < highlightFloors.Count; i++)
             {
                 var floor = highlightFloors[i].GetComponent<Floor>();
@@ -193,17 +194,17 @@ public class NavigationManager : MonoBehaviour, INavigation
                 else if (roomID.Contains("Balcony"))
                 {
                     mt = grass;
-                    mt.SetColor("_EmissionColor", new Color(0, 80f/255f, 0));
+                    mt.SetColor("_EmissionColor", new Color(0, 80f / 255f, 0));
                 }
                 else if (roomID.Contains("WC"))
                 {
                     mt = tile;
-                    mt.SetColor("_EmissionColor", new Color(0, 80f/255f, 0));
+                    mt.SetColor("_EmissionColor", new Color(0, 80f / 255f, 0));
                 }
                 else if (roomID.Contains("Cafeteria"))
                 {
                     mt = wood;
-                    mt.SetColor("_EmissionColor", new Color(0, 80f/255f, 0));
+                    mt.SetColor("_EmissionColor", new Color(0, 80f / 255f, 0));
                 }
 
                 if (mt != null)
@@ -218,7 +219,7 @@ public class NavigationManager : MonoBehaviour, INavigation
 
     public void StopHighlightFloor()
     {
-        if (highlightFloors != null)
+        if (highlightFloors.Count > 0)
         {
             for (int i = 0; i < highlightFloors.Count; i++)
             {

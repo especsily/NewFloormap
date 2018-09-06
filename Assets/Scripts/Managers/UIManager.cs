@@ -96,9 +96,11 @@ public class UIManager : MonoBehaviour, IAnimationUI
         else
         {
             var last = listRoomInfo.Where(x => x.roomID == lastID).FirstOrDefault();
-            last.GetComponent<RoomInfoCanvas>().iconFrame.transform.DOScale(new Vector2(0, 0), 0.2f);
+            last.GetComponent<RoomInfoCanvas>().iconFrame.transform.DOScale(new Vector2(0, 0), 0.2f)
+            .OnComplete(() => last.target.gameObject.SetActive(false));
             var current = listRoomInfo.Where(x => x.roomID == id).FirstOrDefault();
-            current.GetComponent<RoomInfoCanvas>().iconFrame.transform.DOScale(new Vector2(1, 1), 0.2f);
+            current.GetComponent<RoomInfoCanvas>().iconFrame.transform.DOScale(new Vector2(1, 1), 0.2f)
+            .OnComplete(() => current.target.gameObject.SetActive(true));
             lastID = id;
         }
     }
@@ -117,8 +119,10 @@ public class UIManager : MonoBehaviour, IAnimationUI
         const float maxDis = 110;
         foreach (var roomInfo in listRoomInfo)
         {
-            roomInfo.iconFrame.transform.DOScale(new Vector2(1, 1), 0.5f).SetEase(Ease.OutBack, 2.5f).SetDelay(Mathfx.Sinerp(0, 1, Vector3.Distance(roomInfo.target.transform.position, center) / maxDis));
-            roomInfo.target.gameObject.SetActive(true);
+            roomInfo.iconFrame.transform.DOScale(new Vector2(1, 1), 0.5f)
+            .SetEase(Ease.OutBack, 2.5f)
+            .SetDelay(Mathfx.Sinerp(0, 1, Vector3.Distance(roomInfo.target.transform.position, center) / maxDis))
+            .OnStart(() => roomInfo.target.gameObject.SetActive(true));
         }
     }
 
@@ -127,11 +131,12 @@ public class UIManager : MonoBehaviour, IAnimationUI
         const float maxDis = 90;
         foreach (var roomInfo in listRoomInfo)
         {
-            Debug.Log(maxDis - Vector3.Distance(roomInfo.target.transform.position, center));
             if (Vector3.Distance(roomInfo.target.transform.position, center) != 0)
             {
-                roomInfo.iconFrame.transform.DOScale(new Vector2(0, 0), 0.3f).SetEase(Ease.InBack, 2.5f).SetDelay(Mathfx.Coserp(0, 1, (maxDis - Vector3.Distance(roomInfo.target.transform.position, center)) / maxDis));
-                roomInfo.target.gameObject.SetActive(false);
+                roomInfo.iconFrame.transform.DOScale(new Vector2(0, 0), 0.3f)
+                .SetEase(Ease.InBack, 2.5f)
+                .SetDelay(Mathfx.Coserp(0, 1, (maxDis - Vector3.Distance(roomInfo.target.transform.position, center)) / maxDis))
+                .OnComplete(() => roomInfo.target.gameObject.SetActive(false));
             }
         }
     }
