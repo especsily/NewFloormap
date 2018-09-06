@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
 using System.Collections.Generic;
 using Google.GData.Client;
 using Google.GData.Spreadsheets;
@@ -24,7 +22,6 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
     public string _AccessToken = "ya29.GlsJBiiuHGGw1gNjU77iIf-7j8U2gWPwClJakXpgH_OuLBNpZmG2lo_0wLySB0l-sUcwkpMKiLKzqa8zndoCD52yoXamKPECRP89UMwdoiIW_Wfxl29pmsy3NFTv";
 
     public string _SpreadsheetName = "NestCoworkingSpace";
-
     SpreadsheetsService service;
 
     public GOAuth2RequestFactory RefreshAuthenticate()
@@ -35,7 +32,7 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
             AccessToken = _AccessToken,
             ClientId = _ClientId,
             ClientSecret = _ClientSecret,
-            Scope = "https://www.googleapis.com/auth/drive https://spreadsheets.google.com/feeds",
+            Scope = "https://www.googleapis.com/auth/drive https://spreadsheets.google.com/feeds https://www.googleapis.com/auth/spreadsheets.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive",
             AccessType = "offline",
             TokenType = "refresh"
         };
@@ -54,7 +51,6 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
     // access spreadsheet data
     void AccessSpreadsheet(int day, SpreadsheetFeed feed, List<List<RoomData>> listData)
     {
-
         string name = _SpreadsheetName;
         SpreadsheetEntry spreadsheet = null;
 
@@ -84,7 +80,7 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
 
             // Fetch the list feed of the worksheet.
             ListQuery listQuery = new ListQuery(listFeedLink.HRef.ToString());
-            ListFeed listFeed = service.Query(listQuery);
+            ListFeed listFeed = (ListFeed) service.Query(listQuery);
 			
             //access spreadsheet data here
             for (int i = 0; i < listFeed.Entries.Count; i++)
@@ -195,7 +191,7 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
         Google.GData.Spreadsheets.SpreadsheetQuery query = new Google.GData.Spreadsheets.SpreadsheetQuery();
 
         // Make a request to the API and get all spreadsheets.
-        SpreadsheetFeed feed = service.Query(query);
+        SpreadsheetFeed feed = (SpreadsheetFeed) service.Query(query);
 
         if (feed.Entries.Count == 0)
         {
