@@ -10,7 +10,7 @@ namespace ProBuilder2.Examples
     public class CameraControls : MonoBehaviour
     {
         // the current distance from pivot point (locked to Vector3.zero)
-        float distance = 0f;
+        public float distance = 0f;
 
         const string INPUT_MOUSE_SCROLLWHEEL = "Mouse ScrollWheel";
         const string INPUT_MOUSE_X = "Mouse X";
@@ -35,14 +35,15 @@ namespace ProBuilder2.Examples
 
         [Header("Target locked!")]
         public bool isLockedToTarget;
+        public bool isStarted = false;
         public GameObject targetPoint;
 
         void Start()
         {
-            if (isLockedToTarget)
-                distance = Vector3.Distance(transform.position, targetPoint.transform.position);
-            else
-                distance = Vector3.Distance(transform.position, Vector3.zero);
+            // if (isLockedToTarget)
+            //     distance = Vector3.Distance(transform.position, targetPoint.transform.position);
+            // else
+            //     distance = Vector3.Distance(transform.position, Vector3.zero);
         }
 
         void LateUpdate()
@@ -51,7 +52,7 @@ namespace ProBuilder2.Examples
             eulerRotation.z = 0f;
 
             // orbits
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && isStarted)
             {
                 float rot_x = Input.GetAxis(INPUT_MOUSE_X);
                 float rot_y = -Input.GetAxis(INPUT_MOUSE_Y);
@@ -68,9 +69,9 @@ namespace ProBuilder2.Examples
             {
                 eulerRotation.y += Time.deltaTime * idleRotation * dir.x;
                 eulerRotation.x += Time.deltaTime * Mathf.PerlinNoise(Time.time, 0f) * idleRotation * dir.y;
-                // eulerRotation.x += Time.deltaTime * idleRotation * dir.y;
             }
 
+            //update the pos and rotation y base
             transform.localRotation = Quaternion.Euler(eulerRotation);
             if (!isLockedToTarget)
                 transform.position = transform.localRotation * (Vector3.forward * -distance);
@@ -78,7 +79,7 @@ namespace ProBuilder2.Examples
                 transform.position = targetPoint.transform.position + transform.localRotation * (Vector3.forward * -distance);
 
             //zoom in/ zoom out
-            if (Input.GetAxis(INPUT_MOUSE_SCROLLWHEEL) != 0f)
+            if (Input.GetAxis(INPUT_MOUSE_SCROLLWHEEL) != 0f && isStarted)
             {
                 float delta = Input.GetAxis(INPUT_MOUSE_SCROLLWHEEL);
 

@@ -38,6 +38,15 @@ public class UIManager : MonoBehaviour, IAnimationUI
     [SerializeField] private Text time;
     [SerializeField] private float morningTime, afternoonTime;
 
+    [Header("Camera animation")]
+    [SerializeField] private float cameraAnimTime;
+    [SerializeField] private Vector3 cameraStartRotation;
+    [SerializeField] private float cameraStartDistance;
+    [SerializeField] private Image startPanel;
+    [SerializeField] private float startPanelFadeTime;
+
+    // float startRotationY;
+
     void Start()
     {
         //set up list
@@ -48,7 +57,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
         SetupRoomInfo();
 
         //animation
-        AppearFromCenter(Camera.main.GetComponent<CameraControls>().targetPoint.transform.position);
+        StartCameraUI();
     }
 
     void Update()
@@ -56,6 +65,26 @@ public class UIManager : MonoBehaviour, IAnimationUI
         time.text = DateTime.Now.ToString(@"H\:mm");
     }
     // -------------------------------- Animations UI -------------------------------------
+    public void StartCameraUI()
+    {
+        Camera.main.transform.eulerAngles = cameraStartRotation;
+        // startRotationY = Camera.main.transform.eulerAngles.y;
+        startPanel.color = Utilities.ChangeColorAlpha(startPanel.color, 1);
+        var cameraController = Camera.main.GetComponent<CameraControls>();
+        cameraController.idleRotation = (214.5f - cameraStartRotation.y) / cameraAnimTime;
+        cameraController.distance = cameraStartDistance;
+
+        startPanel.DOColor(Utilities.ChangeColorAlpha(startPanel.color, 0), startPanelFadeTime).SetEase(Ease.Linear);
+        DOTween.To(() => cameraController.distance, x => cameraController.distance = x, 140, cameraAnimTime)
+        .SetEase(Ease.InQuad)
+        .OnComplete(() =>
+        {
+            cameraController.idleRotation = 0;
+            cameraController.isStarted = true;
+            AppearFromCenter(cameraController.targetPoint.transform.position);
+        });
+    }
+
     public void ClickRoomInfo(string id)
     {
         if (!isInfoClicked)
@@ -85,31 +114,26 @@ public class UIManager : MonoBehaviour, IAnimationUI
 
     public void AppearFromCenter(Vector3 center)
     {
-        var sequence = DOTween.Sequence();
-        var listOrderByDis = listRoomInfo.OrderBy(x => Vector3.Distance(x.target.transform.position, center)).ToList();
-        for (int i = 0; i < listOrderByDis.Count; i++)
+        const float maxDis = 110;
+        foreach (var roomInfo in listRoomInfo)
         {
-            if (Vector3.Distance(listOrderByDis[i].target.transform.position, center) != 0)
-            {
-                if (!isInfoClicked)
-                    sequence.Append(listOrderByDis[i].iconFrame.transform.DOScale(new Vector2(0f, 0f), 0.05f).From());
-                else
-                    sequence.Append(listOrderByDis[i].iconFrame.transform.DOScale(new Vector2(1f, 1f), 0.05f));
-            }
+            roomInfo.iconFrame.transform.DOScale(new Vector2(1, 1), 0.5f).SetEase(Ease.OutBack, 2.5f).SetDelay(Mathfx.Sinerp(0, 1, Vector3.Distance(roomInfo.target.transform.position, center) / maxDis));
+            roomInfo.target.gameObject.SetActive(true);
         }
-        sequence.Play();
     }
 
     public void DisappearFromCenter(Vector3 center)
     {
-        var sequence = DOTween.Sequence();
-        var listOrderByDis = listRoomInfo.OrderByDescending(x => Vector3.Distance(x.target.transform.position, center)).ToList();
-        for (int i = 0; i < listOrderByDis.Count; i++)
+        const float maxDis = 90;
+        foreach (var roomInfo in listRoomInfo)
         {
-            if (Vector3.Distance(listOrderByDis[i].target.transform.position, center) != 0)
-                sequence.Append(listOrderByDis[i].iconFrame.transform.DOScale(new Vector2(0f, 0f), 0.05f));
+            Debug.Log(maxDis - Vector3.Distance(roomInfo.target.transform.position, center));
+            if (Vector3.Distance(roomInfo.target.transform.position, center) != 0)
+            {
+                roomInfo.iconFrame.transform.DOScale(new Vector2(0, 0), 0.3f).SetEase(Ease.InBack, 2.5f).SetDelay(Mathfx.Coserp(0, 1, (maxDis - Vector3.Distance(roomInfo.target.transform.position, center)) / maxDis));
+                roomInfo.target.gameObject.SetActive(false);
+            }
         }
-        sequence.Play();
     }
     //---------------------------------------------------------------------------------
 
@@ -153,7 +177,6 @@ public class UIManager : MonoBehaviour, IAnimationUI
                 }
 
                 //fill info
-                
                 if (info != "")
                     listRoomInfo[i].roomInfo.text = info.Trim();
                 if (roomInfo != null)
@@ -210,10 +233,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
             .Trim()
             .ToLower().Contains("illiat"))
             {
-                room.iconFrame.color = iliatColor;
-                room.iconFrame1.color = iliatColor;
-                room.iconFrameColor = iliatColor;
-                roomInfo.orderText.color = iliatColor;
+                SetColor(roomInfo, room, iliatColor);
                 return;
             }
             else if (listData[GetNoteRowByTime()]
@@ -222,18 +242,12 @@ public class UIManager : MonoBehaviour, IAnimationUI
             .Trim()
             .ToLower().Contains("techkids"))
             {
-                room.iconFrame.color = techkidsColor;
-                room.iconFrame1.color = techkidsColor;
-                room.iconFrameColor = techkidsColor;
-                roomInfo.orderText.color = techkidsColor;
+                SetColor(roomInfo, room, techkidsColor);
                 return;
             }
             else
             {
-                room.iconFrame.color = hiredColor;
-                room.iconFrame1.color = hiredColor;
-                room.iconFrameColor = hiredColor;
-                roomInfo.orderText.color = hiredColor;
+                SetColor(roomInfo, room, hiredColor);
                 return;
             }
         }
@@ -250,6 +264,17 @@ public class UIManager : MonoBehaviour, IAnimationUI
             roomInfo.infoText.color = availableColor;
             return;
         }
+    }
+
+    void SetColor(RoomInfo roomInfo, RoomInfoCanvas room, Color color)
+    {
+        room.iconFrame.color = color;
+        room.iconFrame1.color = color;
+        room.iconFrameColor = color;
+        room.infoTop.color = color;
+        room.infoBot.color = color;
+        room.infoFrame.color = color;
+        roomInfo.orderText.color = color;
     }
 
     int GetRowByTime()
