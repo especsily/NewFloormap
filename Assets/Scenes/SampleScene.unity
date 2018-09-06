@@ -17675,22 +17675,6 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 730588189}
-    - target: {fileID: 114284209194731122, guid: 3beadfe0f6e4a534681c428eb5669986,
-        type: 2}
-      propertyPath: iconSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7b9b3c2bd2c610847b3af36e1ed60255,
-        type: 3}
-    - target: {fileID: 224786598519367686, guid: 3beadfe0f6e4a534681c428eb5669986,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224786598519367686, guid: 3beadfe0f6e4a534681c428eb5669986,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3beadfe0f6e4a534681c428eb5669986, type: 2}
   m_IsPrefabAsset: 0
@@ -29820,18 +29804,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &2003360231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1101023192496384, guid: 3beadfe0f6e4a534681c428eb5669986,
-    type: 2}
-  m_PrefabInternal: {fileID: 1232134554}
---- !u!222 &2003360233
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2003360231}
-  m_CullTransparentMesh: 0
 --- !u!1 &2011232723
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class RoomInfoCanvas : MonoBehaviour
 {
@@ -55,66 +56,55 @@ public class RoomInfoCanvas : MonoBehaviour
 
     public void MouseOver()
     {
-        if (!isShowing)
-        {
-            isShowing = true;
-            DOTween.CompleteAll();
-            navigationManager.ShowNavigation(roomID);
-            navigationManager.ShowHighlightFloor(roomID, iconColor);
+        DOTween.CompleteAll();
+        navigationManager.ShowNavigation(roomID);
+        navigationManager.ShowHighlightFloor(roomID, iconColor);
 
-            var sequence = DOTween.Sequence();
+        var sequence = DOTween.Sequence();
 
-            //turn off icon
-            // iconFrame.gameObject.SetActive(false);
-            iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
-            icon.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
+        //turn off icon
+        iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
+        icon.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
 
-            //turn on info
-            // frame.gameObject.SetActive(true);
-            infoIconPin.gameObject.SetActive(true);
-            transform.SetAsLastSibling();
+        //turn on info
+        infoIconPin.gameObject.SetActive(true);
+        transform.SetAsLastSibling();
 
-            sequence.Append(infoFrame.transform.DOScaleX(1f, 0.3f).SetEase(Ease.Linear));
-            sequence.Join(infoFrame.transform.DOScaleY(1f, 0.3f).SetEase(Ease.Linear));
-            sequence.Join(infoTop.transform.DOLocalMoveY(74, 0.3f).SetEase(Ease.Linear));
-            sequence.Join(iconFrame1.transform.DOLocalMoveY(74, 0.3f).SetEase(Ease.Linear));
-            // sequence.Join(infoTop.DOColor(Color.white, 0.7f));
-            // sequence.Join(infoBot.DOColor(Color.white, 0.3f));
-            sequence.Play();
-            sequence.OnComplete(() => isShowing = false);
-        }
+        sequence.Append(infoFrame.transform.DOScaleX(1f, 0.3f).SetEase(Ease.Linear));
+        sequence.Join(infoFrame.transform.DOScaleY(1f, 0.3f).SetEase(Ease.Linear));
+        sequence.Join(infoTop.transform.DOLocalMoveY(74, 0.3f).SetEase(Ease.Linear));
+        sequence.Join(iconFrame1.transform.DOLocalMoveY(74, 0.3f).SetEase(Ease.Linear));
+        sequence.Play();
+        sequence.OnComplete(() => isShowing = false);
     }
 
     public void MouseExit()
     {
-        if (!isShowing)
+
+        DOTween.CompleteAll();
+        navigationManager.StopNavigation();
+        navigationManager.StopHighlightFloor();
+
+        var sequence = DOTween.Sequence();
+        sequence.Append(infoFrame.transform.DOScaleY(0, 0.32f).SetEase(Ease.Linear));
+        sequence.Join(infoFrame.transform.DOScaleX(0, 0.32f).SetEase(Ease.Linear));
+        sequence.Join(infoTop.transform.DOLocalMoveY(22.8f, 0.3f).SetEase(Ease.Linear));
+        // sequence.Join(infoTop.DOColor(iconFrameColor, 0.3f));
+        // sequence.Join(infoBot.DOColor(iconFrameColor, 0.3f));
+        sequence.Join(iconFrame1.transform.DOLocalMoveY(22.8f, 0.3f).SetEase(Ease.Linear));
+
+        sequence.OnComplete(() =>
         {
-            isShowing = true;
-            DOTween.CompleteAll();
-            navigationManager.StopNavigation();
-            navigationManager.StopHighlightFloor();
-
-            var sequence = DOTween.Sequence();
-            sequence.Append(infoFrame.transform.DOScaleY(0, 0.32f).SetEase(Ease.Linear));
-            sequence.Join(infoFrame.transform.DOScaleX(0, 0.32f).SetEase(Ease.Linear));
-            sequence.Join(infoTop.transform.DOLocalMoveY(22.8f, 0.3f).SetEase(Ease.Linear));
-            // sequence.Join(infoTop.DOColor(iconFrameColor, 0.3f));
-            // sequence.Join(infoBot.DOColor(iconFrameColor, 0.3f));
-            sequence.Join(iconFrame1.transform.DOLocalMoveY(22.8f, 0.3f).SetEase(Ease.Linear));
-
-            sequence.OnComplete(() =>
-            {
-                isShowing = false;
+                // isShowing = false;
                 // frame.gameObject.SetActive(false);
                 iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 1);
-                icon.color = Color.white;
+            icon.color = Color.white;
 
-                infoIconPin.gameObject.SetActive(false);
-                iconFrame.gameObject.SetActive(true);
-                transform.SetAsFirstSibling();
-            });
-            sequence.Play();
-        }
+            infoIconPin.gameObject.SetActive(false);
+            iconFrame.gameObject.SetActive(true);
+            transform.SetAsFirstSibling();
+        });
+        sequence.Play();
     }
 
     void LateUpdate()

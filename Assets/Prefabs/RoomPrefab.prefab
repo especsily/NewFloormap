@@ -57,7 +57,8 @@ GameObject:
   m_Component:
   - component: {fileID: 224151356497050818}
   - component: {fileID: 114284209194731122}
-  - component: {fileID: 114496473703929212}
+  - component: {fileID: 222963365035320412}
+  - component: {fileID: 114268289161608154}
   m_Layer: 5
   m_Name: RoomPrefab
   m_TagString: Untagged
@@ -125,6 +126,7 @@ GameObject:
   - component: {fileID: 224177316311186910}
   - component: {fileID: 222144945904669540}
   - component: {fileID: 114507231402139410}
+  - component: {fileID: 114485354614479938}
   m_Layer: 5
   m_Name: IconFrame
   m_TagString: Untagged
@@ -389,6 +391,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
+--- !u!114 &114268289161608154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101023192496384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114284209194731122}
+          m_MethodName: MouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &114284209194731122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,17 +446,17 @@ MonoBehaviour:
   roomInfo: {fileID: 114153283995655820}
   canvasRect: {fileID: 0}
   target: {fileID: 0}
-  iconSprite: {fileID: 21300000, guid: a6bb702f557a10f4ebcdc9e65fb89b94, type: 3}
+  iconSprite: {fileID: 21300000, guid: 7b9b3c2bd2c610847b3af36e1ed60255, type: 3}
   iconColor: {r: 1, g: 0.44705883, b: 0, a: 1}
   nameText: "Ph\xF2ng 1"
   infoText: 
   iconFrameColor: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &114496473703929212
+--- !u!114 &114485354614479938
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1101023192496384}
+  m_GameObject: {fileID: 1593586782423672}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -437,23 +469,6 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 114284209194731122}
           m_MethodName: MouseOver
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114284209194731122}
-          m_MethodName: MouseExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -735,6 +750,13 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707485417102694}
+  m_CullTransparentMesh: 0
+--- !u!222 &222963365035320412
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101023192496384}
   m_CullTransparentMesh: 0
 --- !u!222 &222991505280962846
 CanvasRenderer:
