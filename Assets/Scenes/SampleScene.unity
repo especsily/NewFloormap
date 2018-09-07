@@ -727,6 +727,22 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 170566245}
+    - target: {fileID: 114284209194731122, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: iconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a6bb702f557a10f4ebcdc9e65fb89b94,
+        type: 3}
+    - target: {fileID: 114284209194731122, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: roomID
+      value: Room2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114284209194731122, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: nameText
+      value: "Ph\xF2ng 2"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3beadfe0f6e4a534681c428eb5669986, type: 2}
   m_IsPrefabAsset: 0
@@ -18992,6 +19008,10 @@ Prefab:
     - target: {fileID: 2300000, guid: 6a29e88e3ba99874bae0aa764c7c03f5, type: 3}
       propertyPath: m_ReceiveShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 6a29e88e3ba99874bae0aa764c7c03f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.149
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a29e88e3ba99874bae0aa764c7c03f5, type: 3}

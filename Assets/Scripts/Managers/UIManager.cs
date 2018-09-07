@@ -264,6 +264,9 @@ public class UIManager : MonoBehaviour, IAnimationUI
                 room.iconFrame.color = availableColor;
                 room.iconFrame1.color = availableColor;
                 room.iconFrameColor = availableColor;
+                room.infoFrame.color = availableColor;
+                room.infoTop.color = availableColor;
+                room.infoBot.color = availableColor;
             }
             roomInfo.orderText.color = availableColor;
             roomInfo.infoText.color = availableColor;

@@ -204,7 +204,7 @@ public class NavigationManager : MonoBehaviour, INavigation
                 else if (roomID.Contains("Cafeteria"))
                 {
                     mt = wood;
-                    mt.SetColor("_EmissionColor", new Color(0, 80f / 255f, 0));
+                    mt.SetColor("_EmissionColor", new Color(0, 120f / 255f, 0));
                 }
 
                 if (mt != null)
