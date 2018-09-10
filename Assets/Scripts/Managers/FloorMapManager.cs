@@ -6,7 +6,7 @@ using System.Linq;
 public class FloorMapManager : MonoBehaviour
 {
     public NavigationManager navigationManager;
-    public SpreadsheetManager spreadsheetManager;
+    public SpreadSheetReader spreadsheetManager;
     public UIManager uiManager;
     
     void Awake()

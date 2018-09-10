@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface ISpreadSheet {
-	List<List<RoomData>> GetSpreadSheetData(int day);
+	List<List<RoomData>> GetSpreadSheetData();
 }

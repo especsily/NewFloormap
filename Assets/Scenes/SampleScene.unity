@@ -743,6 +743,26 @@ Prefab:
       propertyPath: nameText
       value: "Ph\xF2ng 2"
       objectReference: {fileID: 0}
+    - target: {fileID: 224457548980595740, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457548980595740, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 13.333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 224988100954921800, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -38.77778
+      objectReference: {fileID: 0}
+    - target: {fileID: 224988100954921800, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 8.888889
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3beadfe0f6e4a534681c428eb5669986, type: 2}
   m_IsPrefabAsset: 0
@@ -14145,8 +14165,8 @@ GameObject:
   - component: {fileID: 981547022}
   - component: {fileID: 981547024}
   - component: {fileID: 981547021}
-  - component: {fileID: 981547025}
   - component: {fileID: 981547023}
+  - component: {fileID: 981547025}
   m_Layer: 0
   m_Name: NavigationManager
   m_TagString: Untagged
@@ -14370,15 +14390,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 981547020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1622e4fe5d3dc4ef58085fef610b2dcf, type: 3}
+  m_Script: {fileID: 11500000, guid: c56ad733a94c6dc448d0928544577987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ClientId: 842924670934-7pkkanve9fu70mtt1t61gh9np7oask9e.apps.googleusercontent.com
-  _ClientSecret: 9IMwJTcuJyBAYYUtOOL7wJM5
-  _AccessCode: 4/SwC-XidXn6bdHJWKi1Vo4pmirZAaXOmxeAP9tk6numrWNMkIPYwGTY4
-  _RefreshToken: 1/MbDfoh-Y9fDM26SiNhqTfF4AYnHGg2sop-DbTz5TbtU
-  _AccessToken: ya29.GlsJBiiuHGGw1gNjU77iIf-7j8U2gWPwClJakXpgH_OuLBNpZmG2lo_0wLySB0l-sUcwkpMKiLKzqa8zndoCD52yoXamKPECRP89UMwdoiIW_Wfxl29pmsy3NFTv
-  _SpreadsheetName: NestCoworkingSpace
+  docId: 1o_2vhLZjkUAd0bSt3Nn_VEiupVr1R1Va0N99qXWTaEM
+  monId: 0
+  tueId: 1661805700
+  wedId: 1665133099
+  thurId: 703827338
+  friId: 592458813
+  satId: 263137168
+  sunId: 2092771653
 --- !u!1001 &983983779
 Prefab:
   m_ObjectHideFlags: 0
@@ -20601,6 +20623,26 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 730588189}
+    - target: {fileID: 224457548980595740, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -22.666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 224457548980595740, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 13.333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 224988100954921800, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -38.77778
+      objectReference: {fileID: 0}
+    - target: {fileID: 224988100954921800, guid: 3beadfe0f6e4a534681c428eb5669986,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 8.888889
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3beadfe0f6e4a534681c428eb5669986, type: 2}
   m_IsPrefabAsset: 0

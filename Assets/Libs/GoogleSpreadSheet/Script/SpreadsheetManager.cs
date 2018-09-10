@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
+using UnityEditor;
+using System.Collections;
 using System.Collections.Generic;
 using Google.GData.Client;
 using Google.GData.Spreadsheets;
+using System.Net;
+using System;
 
 // [InitializeOnLoad]
 public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
@@ -20,8 +24,8 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
     // enter Auth 2.0 Refresh Token and AccessToken after succesfully authorizing with Access Code
     public string _RefreshToken = "1/MbDfoh-Y9fDM26SiNhqTfF4AYnHGg2sop-DbTz5TbtU";
     public string _AccessToken = "ya29.GlsJBiiuHGGw1gNjU77iIf-7j8U2gWPwClJakXpgH_OuLBNpZmG2lo_0wLySB0l-sUcwkpMKiLKzqa8zndoCD52yoXamKPECRP89UMwdoiIW_Wfxl29pmsy3NFTv";
-
     public string _SpreadsheetName = "NestCoworkingSpace";
+
     SpreadsheetsService service;
 
     public GOAuth2RequestFactory RefreshAuthenticate()
@@ -32,19 +36,19 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
             AccessToken = _AccessToken,
             ClientId = _ClientId,
             ClientSecret = _ClientSecret,
-            Scope = "https://www.googleapis.com/auth/drive https://spreadsheets.google.com/feeds https://www.googleapis.com/auth/spreadsheets.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive",
+            Scope = "https://spreadsheets.google.com/feeds", //https://www.googleapis.com/auth/drive 
             AccessType = "offline",
             TokenType = "refresh"
         };
         string authUrl = OAuthUtil.CreateOAuth2AuthorizationUrl(parameters);
-        return new GOAuth2RequestFactory("spreadsheet", "MySpreadsheetIntegration-v1", parameters);
+        return new GOAuth2RequestFactory("spreadsheet", "nestcoworkingspace", parameters);
     }
 
     void Auth()
     {
         GOAuth2RequestFactory requestFactory = RefreshAuthenticate();
 
-        service = new SpreadsheetsService("MySpreadsheetIntegration-v1");
+        service = new SpreadsheetsService("nestcoworkingspace");
         service.RequestFactory = requestFactory;
     }
 
@@ -80,7 +84,7 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
 
             // Fetch the list feed of the worksheet.
             ListQuery listQuery = new ListQuery(listFeedLink.HRef.ToString());
-            ListFeed listFeed = (ListFeed) service.Query(listQuery);
+            ListFeed listFeed = service.Query(listQuery);
 			
             //access spreadsheet data here
             for (int i = 0; i < listFeed.Entries.Count; i++)
@@ -122,7 +126,7 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
 
         string CLIENT_SECRET = _ClientSecret;
 
-        string SCOPE = "https://www.googleapis.com/auth/drive https://spreadsheets.google.com/feeds https://docs.google.com/feeds";
+        string SCOPE = "https://spreadsheets.google.com/feeds"; //https://www.googleapis.com/auth/drive https://docs.google.com/feeds
 
         string REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob";
 
@@ -188,10 +192,10 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
 
         Auth();
 
-        Google.GData.Spreadsheets.SpreadsheetQuery query = new Google.GData.Spreadsheets.SpreadsheetQuery();
+        SpreadsheetQuery query = new SpreadsheetQuery();
 
         // Make a request to the API and get all spreadsheets.
-        SpreadsheetFeed feed = (SpreadsheetFeed) service.Query(query);
+        SpreadsheetFeed feed = service.Query(query);
 
         if (feed.Entries.Count == 0)
         {
@@ -201,6 +205,16 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
 
         AccessSpreadsheet(day, feed, listData);
         return listData;
+    }
+
+    public List<List<RoomData>> GetSpreadSheetData()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool IsDownloadComplete()
+    {
+        throw new NotImplementedException();
     }
 }
 

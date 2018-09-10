@@ -13,8 +13,8 @@ public class UIManager : MonoBehaviour, IAnimationUI
     public INavigation navigationManager;
 
     [Header("Set up list")]
-    public List<RoomInfoCanvas> listRoomInfo;
-    private List<List<RoomData>> listData; // truy cap theo cau truc [row][col] bat dau tu row 0 va col 1
+    [SerializeField] private List<RoomInfoCanvas> listRoomInfo;
+    private List<List<RoomData>> listData; // truy cap theo cau truc [row][col] bat dau tu row 0 va col 0
 
     [Header("Set up UI components")]
     /*
@@ -53,11 +53,11 @@ public class UIManager : MonoBehaviour, IAnimationUI
         listData = new List<List<RoomData>>();
 
         //set up data
-        SetupData();
-        SetupRoomInfo();
+        StartCoroutine(SetupData());
+        // SetupRoomInfo();
 
         //animation
-        StartCameraUI();
+        // StartCameraUI();
     }
 
     void Update()
@@ -190,10 +190,13 @@ public class UIManager : MonoBehaviour, IAnimationUI
         }
     }
 
-    void SetupData()
+    IEnumerator SetupData()
     {
         //lay spreadsheet ngay hom nay
-        listData = spreadsheetManager.GetSpreadSheetData(ChangeDayOfWeek(DateTime.Today.DayOfWeek));
+        yield return new WaitUntil(() => spreadsheetManager.GetSpreadSheetData() != null);
+        listData = spreadsheetManager.GetSpreadSheetData();
+        SetupRoomInfo();
+        StartCameraUI();
     }
 
     GameObject CreateRoomInfo(Transform parent, GameObject roomInfoPrefab, string info, string roomID)
@@ -235,8 +238,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
             if (listData[GetNoteRowByTime()]
             .Where(x => x.id.Trim().ToLower() == roomID.Trim().ToLower())
             .FirstOrDefault().info
-            .Trim()
-            .ToLower().Contains("illiat"))
+            .Trim().Contains("Illiat"))
             {
                 SetColor(roomInfo, room, iliatColor);
                 return;
@@ -244,8 +246,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
             else if (listData[GetNoteRowByTime()]
             .Where(x => x.id.Trim().ToLower() == roomID.Trim().ToLower())
             .FirstOrDefault().info
-            .Trim()
-            .ToLower().Contains("techkids"))
+            .Trim().Contains("Techkids"))
             {
                 SetColor(roomInfo, room, techkidsColor);
                 return;
@@ -305,26 +306,6 @@ public class UIManager : MonoBehaviour, IAnimationUI
             return 3;
         else
             return 5;
-    }
-
-    int ChangeDayOfWeek(DayOfWeek today)
-    {
-        if (today == DayOfWeek.Monday)
-            return 0;
-        else if (today == DayOfWeek.Tuesday)
-            return 1;
-        else if (today == DayOfWeek.Wednesday)
-            return 2;
-        else if (today == DayOfWeek.Thursday)
-            return 3;
-        else if (today == DayOfWeek.Friday)
-            return 4;
-        else if (today == DayOfWeek.Saturday)
-            return 5;
-        else if (today == DayOfWeek.Sunday)
-            return 6;
-        else
-            return 0;
     }
     // --------------------------------------------------------------------------------
 
