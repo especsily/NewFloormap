@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class SpreadSheetReader : MonoBehaviour, ISpreadSheet
@@ -17,7 +18,7 @@ public class SpreadSheetReader : MonoBehaviour, ISpreadSheet
     List<List<RoomData>> listData = null;
     private Action<string> GetData;
 
-    void Awake()
+    void Start()
     {
         GetData += ReadData;
         StartCoroutine(DownloadCSVCoroutine(docId, GetData, false, "test", GetSheetIdByDay(DateTime.Today.DayOfWeek)));
@@ -42,43 +43,38 @@ public class SpreadSheetReader : MonoBehaviour, ISpreadSheet
             }
             listData.Add(listValue);
         }
-
-        foreach (var row in listData)
-        {
-            foreach (var col in row)
-            {
-                Debug.Log(col.id + " - " + col.info);
-            }
-        }
     }
     IEnumerator DownloadCSVCoroutine(string docId, Action<string> callback,
                                                    bool saveAsset = false, string assetName = null, string sheetId = null)
     {
         string url = "https://docs.google.com/spreadsheets/d/" + docId + "/export?format=csv";
-
         if (!string.IsNullOrEmpty(sheetId))
         {
             url += "&gid=" + sheetId;
         }
 
-        WWWForm form = new WWWForm();
-        WWW download = new WWW(url, form);
+        string path = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT7qThY9WVgGN8JON52h_HmWy69fo1ZPGuLrs5SW50uTaVQ_EL64SBJqCMqRZlCco9UZHNHaftgP0ys/pub?gid=0&single=true&output=csv";
+        // if (!string.IsNullOrEmpty(sheetId))
+        // {
+        //     url += "&gid=" + sheetId;
+        // }
+        UnityWebRequest www = UnityWebRequest.Get(path);
+        yield return www.SendWebRequest();
 
-        // yield return download;
-        yield return download;
-
-        if (!string.IsNullOrEmpty(download.error))
+        if (www.isNetworkError || www.isHttpError)
         {
-            Debug.Log("Error downloading: " + download.error);
+            Debug.Log(www.error);
         }
         else
         {
-            Debug.Log(download.text);
-            callback(download.text);
+            // Show results as text
+            Debug.Log(www.downloadHandler.text);
+
+            callback(www.downloadHandler.text);
             if (saveAsset)
             {
                 if (!string.IsNullOrEmpty(assetName))
-                    File.WriteAllText("Assets/Resources/" + assetName + ".csv", download.text);
+                    File.WriteAllText("Assets/Resources/" + assetName + ".csv", www.downloadHandler.text);
                 else
                 {
                     throw new Exception("assetName is null");
@@ -138,8 +134,6 @@ public class SpreadSheetReader : MonoBehaviour, ISpreadSheet
     {
         text = CleanReturnInCsvTexts(text);
 
-        Debug.Log(text);
-
         var list = new List<List<string>>();
         var lines = Regex.Split(text, LINE_SPLIT_RE);
 
@@ -198,5 +192,6 @@ public class SpreadSheetReader : MonoBehaviour, ISpreadSheet
     public List<List<RoomData>> GetSpreadSheetData()
     {
         return listData;
+        //return null;
     }
 }

@@ -54,10 +54,6 @@ public class UIManager : MonoBehaviour, IAnimationUI
 
         //set up data
         StartCoroutine(SetupData());
-        // SetupRoomInfo();
-
-        //animation
-        // StartCameraUI();
     }
 
     void Update()

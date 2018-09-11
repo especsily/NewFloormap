@@ -219,7 +219,7 @@ public class NavigationManager : MonoBehaviour, INavigation
 
     public void StopHighlightFloor()
     {
-        if (highlightFloors.Count > 0)
+        if (highlightFloors !=  null)
         {
             for (int i = 0; i < highlightFloors.Count; i++)
             {

@@ -182,8 +182,9 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
 
     }
 
-    public List<List<RoomData>> GetSpreadSheetData(int day)
+    public List<List<RoomData>> GetSpreadSheetData()
     {
+        UnsafeSecurityPolicy.Instate();
         if (_RefreshToken == "" && _AccessToken == "")
         {
             Init();
@@ -203,18 +204,28 @@ public class SpreadsheetManager : MonoBehaviour, ISpreadSheet
             return null;
         }
 
-        AccessSpreadsheet(day, feed, listData);
+        AccessSpreadsheet(GetSheetIdByDay(DateTime.Today.DayOfWeek), feed, listData);
         return listData;
     }
 
-    public List<List<RoomData>> GetSpreadSheetData()
+    int GetSheetIdByDay(DayOfWeek day)
     {
-        throw new NotImplementedException();
-    }
-
-    public bool IsDownloadComplete()
-    {
-        throw new NotImplementedException();
+        if (day == DayOfWeek.Monday)
+            return 0;
+        else if (day == DayOfWeek.Tuesday)
+            return 1;
+        else if (day == DayOfWeek.Wednesday)
+            return 2;
+        else if (day == DayOfWeek.Thursday)
+            return 3;
+        else if (day == DayOfWeek.Friday)
+            return 4;
+        else if (day == DayOfWeek.Saturday)
+            return 5;
+        else if (day == DayOfWeek.Sunday)
+            return 6;
+        else
+           return 0;
     }
 }
 
