@@ -27,24 +27,7 @@ public class HttpClientTest : MonoBehaviour
     JObject secrets;
     UserCredential credential;
     ValueRange response;
-
-    //private async Task CreateUserCreadential()
-    //{
-    //    credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-    //        new ClientSecrets() { ClientId = secrets["installed"]["client_id"].Value<string>(), ClientSecret = secrets["installed"]["client_secret"].Value<string>() },
-    //        Scopes,
-    //        "user",
-    //        CancellationToken.None,
-    //        new FileDataStore(credPath, true));
-    //}
-
-    //private async Task GetResponse(SpreadsheetsResource.ValuesResource.GetRequest request)
-    //{
-    //    response = await request.ExecuteAsync();
-    //    Debug.Log(response.MajorDimension);
-    //    Debug.Log("Get Response!");
-    //}
-
+    
     private void GetData()
     {
         credential = GoogleWebAuthorizationBroker.AuthorizeAsync(

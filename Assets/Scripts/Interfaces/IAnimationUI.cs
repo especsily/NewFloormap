@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IAnimationUI
 {
     void ClickRoomInfo(string id);
-    // void ReappearAllRoomInfo();
+    void HideAllRoomInfo();
 }

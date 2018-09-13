@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour, IAnimationUI
 
     [Header("Set up list")]
     [SerializeField] private List<RoomInfoCanvas> listRoomInfo;
+    // private List<RoomInfoCanvas> listShowingRoomInfo;
+
     private List<List<RoomData>> listData; // truy cap theo cau truc [row][col] bat dau tu row 0 va col 0
 
     [Header("Set up UI components")]
@@ -41,14 +43,18 @@ public class UIManager : MonoBehaviour, IAnimationUI
     [Header("Camera animation")]
     [SerializeField] private float cameraAnimTime;
     [SerializeField] private Vector3 cameraStartRotation;
+    [SerializeField] private float cameraFinishRotation;
     [SerializeField] private float cameraStartDistance;
+    [SerializeField] private float cameraFinishDistance;
     [SerializeField] private Image startPanel;
     [SerializeField] private float startPanelFadeTime;
-
-    // float startRotationY;
+    private GameObject cameraPivot;
 
     void Start()
     {
+        startPanel.color = Utilities.ChangeColorAlpha(startPanel.color, 1);
+        cameraPivot = Camera.main.GetComponent<CameraController>().targetPoint;
+
         //set up list
         listData = new List<List<RoomData>>();
 
@@ -61,22 +67,34 @@ public class UIManager : MonoBehaviour, IAnimationUI
         time.text = DateTime.Now.ToString(@"H\:mm");
     }
     // -------------------------------- Animations UI -------------------------------------
+    public void HideAllRoomInfo()
+    {
+        for (int i = 0; i < listRoomInfo.Count; i++)
+        {
+            if (listRoomInfo[i].isShowingInfoFrame())
+            {
+                listRoomInfo[i].HideInfoFrame();
+                break;
+            }
+        }
+    }
+
     public void StartCameraUI()
     {
         Camera.main.transform.eulerAngles = cameraStartRotation;
         // startRotationY = Camera.main.transform.eulerAngles.y;
-        startPanel.color = Utilities.ChangeColorAlpha(startPanel.color, 1);
-        var cameraController = Camera.main.GetComponent<CameraControls>();
-        cameraController.idleRotation = (214.5f - cameraStartRotation.y) / cameraAnimTime;
+        var cameraController = Camera.main.GetComponent<CameraController>();
+        cameraController.idleRotation = (cameraFinishRotation - cameraStartRotation.y) / cameraAnimTime;
         cameraController.distance = cameraStartDistance;
 
         startPanel.DOColor(Utilities.ChangeColorAlpha(startPanel.color, 0), startPanelFadeTime).SetDelay(0.3f);
-        DOTween.To(() => cameraController.distance, x => cameraController.distance = x, 140, cameraAnimTime)
+        DOTween.To(() => cameraController.distance, x => cameraController.distance = x, cameraFinishDistance, cameraAnimTime)
         .SetEase(Ease.InQuad)
         .OnComplete(() =>
         {
             cameraController.idleRotation = 0;
             cameraController.isStarted = true;
+            startPanel.gameObject.SetActive(false);
             AppearFromCenter(cameraController.targetPoint.transform.position);
         });
     }
@@ -146,6 +164,8 @@ public class UIManager : MonoBehaviour, IAnimationUI
             for (int i = 0; i < listRoomInfo.Count; i++)
             {
                 listRoomInfo[i].navigationManager = this.navigationManager;
+                listRoomInfo[i].UIManager = this;
+
                 string info = "";
                 string roomID = "";
                 GameObject roomInfo = null;
@@ -177,9 +197,6 @@ public class UIManager : MonoBehaviour, IAnimationUI
                     SetupColor(listRoomInfo[i], roomID, info, roomInfo);
                 }
 
-                //fill info
-                if (info != "")
-                    listRoomInfo[i].roomInfo.text = info.Trim();
                 if (roomInfo != null)
                     roomInfo.GetComponent<RoomInfo>().id = listRoomInfo[i].roomID;
             }
@@ -257,7 +274,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
         {
             if (roomID != "Cafeteria" && roomID != "OpenSpace")
             {
-                room.roomInfo.text = "Phòng trống cho thuê!";
+                // room.roomInfo.text = "\n\nPhòng trống cho thuê!";
                 room.iconFrame.color = availableColor;
                 room.iconFrame1.color = availableColor;
                 room.iconFrameColor = availableColor;
@@ -331,10 +348,12 @@ public class UIManager : MonoBehaviour, IAnimationUI
 
     public void TurnOnListInfo()
     {
+        HideAllRoomInfo();
         if (!isShowingInfo)
         {
             isShowingInfo = true;
-            Camera.main.GetComponent<CameraControls>().targetPoint.transform.DOMove(new Vector3(-5, 0, 7), 0.5f);
+            listInfoCanvas.gameObject.SetActive(true);
+            cameraPivot.transform.DOMove(Utilities.CameraMoveToSide(cameraPivot.transform.position), 0.5f);
             roomInfoCanvas.DOAnchorPosX(0, 0.5f)
             .OnComplete(() =>
             {
@@ -344,10 +363,13 @@ public class UIManager : MonoBehaviour, IAnimationUI
         else
         {
             isShowingInfo = false;
-            Camera.main.GetComponent<CameraControls>().targetPoint.transform.DOMove(new Vector3(-9, 0, 10), 0.5f);
-            roomInfoCanvas.DOAnchorPosX(-420, 0.5f)
+            // Camera.main.GetComponent<CameraController>().targetPoint.transform.DOMove(new Vector3(-9, 0, 10), 0.5f);
+            cameraPivot.transform.DOMove(Utilities.CameraMoveBackToCurrent(cameraPivot.transform.position), 0.5f);
+            roomInfoCanvas.DOAnchorPosX(-404, 0.5f)
+            .SetEase(Ease.OutCubic)
             .OnComplete(() =>
             {
+                listInfoCanvas.gameObject.SetActive(false);
                 infoIcon.transform.localScale = new Vector2(-1, 1);
             });
 

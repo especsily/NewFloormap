@@ -4,101 +4,156 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class RoomInfoCanvas : MonoBehaviour
 {
+    [Header("Components")]
+    [HideInInspector]
     public string roomID;
-    //icon panel
-    public Image iconFrame, icon;
-    //icon in info panel
-    public Image iconFrame1, icon1;
-    public Image infoFrame;
-    public GameObject infoIconPin, frame;
-    public Image infoTop, infoBot;
     public Text roomName;
     public Text roomInfo;
     public RectTransform canvasRect;
     public GameObject target;
     private RectTransform rectTransform;
+    [Header("Icon pin")]
+    public Image iconFrame;
+    public Image icon;
+    public Text iconText;
+
+    [Header("Icon in frame")]
+    public Text iconText1;
+    public Image iconFrame1, icon1;
+    public Image infoFrame;
+    public GameObject infoIconPin, frame;
+    public Image infoTop, infoBot;
 
     [Header("Options")]
     [SerializeField] private Sprite iconSprite;
     [SerializeField] private Color iconColor;
     [SerializeField] private string nameText;
-    [SerializeField] private string infoText;
+    public string infoText;
+
+    [Header("Info text")]
+    public string area;
+    public string numberOfPeople;
+    public string equipments;
+
+    [HideInInspector]
     public Color iconFrameColor;
     private bool isShowing = false;
 
     //navigation manager
     public INavigation navigationManager;
+    public IAnimationUI UIManager;
+
+    //sequence
+    private Sequence showInfoSequence;
+    private Sequence hideInfoSequence;
 
     void Awake()
     {
+        DOTween.SetTweensCapacity(500, 125);
         roomID = transform.name;
         rectTransform = GetComponent<RectTransform>();
 
+        //setup sequence
+        showInfoSequence = DOTween.Sequence();
+        showInfoSequence.SetAutoKill(false);
+        float posY;
+        if (roomID.Contains("Room") && roomID != "RestRoom")
+            posY = 122f;
+        else
+            posY = 74f;
+
+        showInfoSequence.Append((infoTop.transform as RectTransform).DOAnchorPosY(posY, 0.15f));
+        showInfoSequence.Join((iconFrame1.transform as RectTransform).DOAnchorPosY(posY, 0.15f));
+        showInfoSequence.Join(infoFrame.transform.DOScaleY(1f, 0.15f));
+        showInfoSequence.Join(infoFrame.transform.DOScaleX(1f, 0.15f));
+
+        hideInfoSequence = DOTween.Sequence();
+        hideInfoSequence.SetAutoKill(false);
+        hideInfoSequence.Append(infoFrame.transform.DOScaleY(0, 0.15f));
+        hideInfoSequence.Join(infoFrame.transform.DOScaleX(0, 0.15f));
+        hideInfoSequence.Join((infoTop.transform as RectTransform).DOAnchorPosY(22.8f, 0.15f));
+        hideInfoSequence.Join((iconFrame1.transform as RectTransform).DOAnchorPosY(22.8f, 0.15f));
+        hideInfoSequence.OnComplete(() =>
+        {
+            iconFrame.gameObject.SetActive(true);
+            frame.gameObject.SetActive(false);
+            transform.SetAsFirstSibling();
+        });
+
         //set up
-        icon.sprite = iconSprite;
-        icon1.sprite = iconSprite;
+        if (icon != null)
+        {
+            icon.sprite = iconSprite;
+            icon1.sprite = iconSprite;
+        }
+        else
+        {
+            int number = int.Parse(transform.name.Substring(4));
+            iconText.text = string.Format("{0:00}", number);  
+            iconText1.text = string.Format("{0:00}", number);
+        }
         iconFrame.color = iconColor;
         iconFrame1.color = iconColor;
 
+        if (roomID.Contains("Room") && roomID != "RestRoom")
+            infoText = area
+            + "\n" + numberOfPeople
+            + "\n" + equipments;
         roomName.text = nameText;
         roomInfo.text = infoText;
-        roomName.color = Color.white;
-        roomInfo.color = Color.white;
 
         iconFrameColor = iconFrame.color;
         infoFrame.color = iconFrameColor;
         infoTop.color = iconFrameColor;
         infoBot.color = iconFrameColor;
+
     }
 
-    public void MouseOver()
+    void SetupButtonColor()
+    {
+        var button = GetComponentInChildren<Button>();
+        ColorBlock colorVar = button.colors;
+        colorVar.normalColor = iconFrameColor;
+        colorVar.highlightedColor = Utilities.ChangeHighlightColor(colorVar.normalColor);
+        button.colors = colorVar;
+    }
+
+    public bool isShowingInfoFrame()
+    {
+        return isShowing;
+    }
+
+    public void ShowInfoFrame()
     {
         DOTween.CompleteAll();
+        UIManager.HideAllRoomInfo();
+
+        isShowing = true;
         navigationManager.ShowNavigation(roomID);
         navigationManager.ShowHighlightFloor(roomID, iconColor);
 
         //turn off icon
-        // iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
-        // icon.color = Utilities.ChangeColorAlpha(iconFrame.color, 0);
         iconFrame.gameObject.SetActive(false);
 
-        //turn on info
-        infoIconPin.gameObject.SetActive(true);
+        // turn on info
+        frame.gameObject.SetActive(true);
         transform.SetAsLastSibling();
 
-        var sequence = DOTween.Sequence();
-        sequence.Append(infoFrame.transform.DOScaleX(1f, 0.15f));
-        sequence.Join(infoFrame.transform.DOScaleY(1f, 0.15f));
-        sequence.Join(infoTop.transform.DOLocalMoveY(74, 0.15f));
-        sequence.Join(iconFrame1.transform.DOLocalMoveY(74, 0.15f));
-        sequence.Play();
+        showInfoSequence.Restart();
     }
 
-    public void MouseExit()
+    public void HideInfoFrame()
     {
         DOTween.CompleteAll();
+        isShowing = false;
         navigationManager.StopNavigation();
         navigationManager.StopHighlightFloor();
 
-        var sequence = DOTween.Sequence();
-        sequence.Append(infoFrame.transform.DOScaleY(0, 0.15f));
-        sequence.Join(infoFrame.transform.DOScaleX(0, 0.15f));
-        sequence.Join(infoTop.transform.DOLocalMoveY(22.8f, 0.15f));
-        sequence.Join(iconFrame1.transform.DOLocalMoveY(22.8f, 0.15f));
-
-        sequence.OnComplete(() =>
-        {
-            // iconFrame.color = Utilities.ChangeColorAlpha(iconFrame.color, 1);
-            // icon.color = Color.white;
-            
-            infoIconPin.gameObject.SetActive(false);
-            iconFrame.gameObject.SetActive(true);
-            transform.SetAsFirstSibling();
-        });
-        sequence.Play();
+        hideInfoSequence.Restart();
     }
 
     void LateUpdate()

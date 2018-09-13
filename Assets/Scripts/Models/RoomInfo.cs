@@ -14,6 +14,7 @@ public class RoomInfo : MonoBehaviour {
 	public void MouseClick()
 	{
 		DOTween.CompleteAll();
+		UImanager.HideAllRoomInfo();
 		UImanager.ClickRoomInfo(id);
 	}
 
