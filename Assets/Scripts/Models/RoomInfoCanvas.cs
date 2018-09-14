@@ -100,9 +100,9 @@ public class RoomInfoCanvas : MonoBehaviour
         iconFrame1.color = iconColor;
 
         if (roomID.Contains("Room") && roomID != "RestRoom")
-            infoText = area
-            + "\n" + numberOfPeople
-            + "\n" + equipments;
+            infoText = "- " +area + "\n" 
+            + "- " + numberOfPeople + "\n" 
+            + "- " + equipments;
         roomName.text = nameText;
         roomInfo.text = infoText;
 

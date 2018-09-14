@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7a45704b8180c904cb4083d470a246e0, type: 3}
   m_Color: {r: 0.32941177, g: 0.5254902, b: 0.81960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7a45704b8180c904cb4083d470a246e0, type: 3}
   m_Color: {r: 0.32941177, g: 0.5254902, b: 0.81960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7a45704b8180c904cb4083d470a246e0, type: 3}
   m_Color: {r: 0.32941177, g: 0.5254902, b: 0.81960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -567,10 +567,10 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 14
+    m_Top: 18
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 6
+  m_Spacing: 5
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7a45704b8180c904cb4083d470a246e0, type: 3}
   m_Color: {r: 0.32941177, g: 0.5254902, b: 0.81960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 7a45704b8180c904cb4083d470a246e0, type: 3}
   m_Color: {r: 0.32941177, g: 0.5254902, b: 0.81960785, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
@@ -743,9 +743,9 @@ MonoBehaviour:
   infoBot: {fileID: 114727149367767632}
   iconSprite: {fileID: 21300000, guid: cdbaa171a9ceb7247931091e2060b42a, type: 3}
   iconColor: {r: 1, g: 0.44705883, b: 0, a: 1}
-  nameText: "Ph\xF2ng 12"
-  infoText: "30m2 (10m x 3m)\n12 ng\u01B0\u1EDDi\nInternet, 1 Tivi, 1 T\u1EE7 \u0111\u1EF1ng
-    \u0111\u1ED3, B\xE0n gh\u1EBF"
+  nameText: "Ph\xF2ng 1"
+  infoText: "\n30 ng\u01B0\u1EDDi\nInternet, 1 Tivi, 1 T\u1EE7 \u0111\u1EF1ng \u0111\u1ED3,
+    B\xE0n gh\u1EBF"
   area: 30m2 (10m x 3m)
   numberOfPeople: "30 ng\u01B0\u1EDDi"
   equipments: "Internet, 1 Tivi, 1 T\u1EE7 \u0111\u1EF1ng \u0111\u1ED3, B\xE0n gh\u1EBF"
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 100
+  m_PreferredWidth: 110
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -820,8 +820,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: "30m2 (10m x 3m)\n20~25 ng\u01B0\u1EDDi\nInternet, 1 Tivi, 1 T\u1EE7 \u0111\u1EF1ng
-    \u0111\u1ED3, B\xE0n gh\u1EBF"
+  m_Text: "- 30m2 (10m x 3m)\n- 20~25 ng\u01B0\u1EDDi\n- Internet, 1 Tivi, 1 T\u1EE7
+    \u0111\u1EF1ng \u0111\u1ED3, B\xE0n gh\u1EBF"
 --- !u!222 &222077558903213894
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -990,7 +990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64, y: -21.125}
+  m_AnchoredPosition: {x: 64, y: -25.125}
   m_SizeDelta: {x: 100, y: 14.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224220451732595270
@@ -1084,7 +1084,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64, y: -35}
+  m_AnchoredPosition: {x: 64, y: -38}
   m_SizeDelta: {x: 30, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224444192124573230
@@ -1142,6 +1142,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64, y: -67.375}
-  m_SizeDelta: {x: 100, y: 51.25}
+  m_AnchoredPosition: {x: 64, y: -69.375}
+  m_SizeDelta: {x: 110, y: 51.25}
   m_Pivot: {x: 0.5, y: 0.5}
