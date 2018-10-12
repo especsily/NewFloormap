@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
 
         startPanel.DOColor(Utilities.ChangeColorAlpha(startPanel.color, 0), startPanelFadeTime).SetDelay(0.3f);
         DOTween.To(() => cameraController.distance, x => cameraController.distance = x, cameraFinishDistance, cameraAnimTime)
-        .SetEase(Ease.InQuad)
+        .SetEase(Ease.Linear)
         .OnComplete(() =>
         {
             cameraController.idleRotation = 0;
