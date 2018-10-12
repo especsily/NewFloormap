@@ -30,7 +30,7 @@ namespace ProBuilder2.Examples
 
         // how fast the idle camera movement is
         [HideInInspector]
-        public float idleRotation = 1f;
+        public float idleRotation = 0f;
 
         // private Vector2 dir = new Vector2(.8f, .2f);
         [SerializeField] private Vector2 dir;
@@ -60,16 +60,16 @@ namespace ProBuilder2.Examples
 
         public bool MouseScreenCheck()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             if (Input.mousePosition.x == 0 || Input.mousePosition.y == 0 || Input.mousePosition.x >= Handles.GetMainGameViewSize().x - 1 || Input.mousePosition.y >= Handles.GetMainGameViewSize().y - 1)
             {
                 return false;
             }
-            #else
+#else
             if (Input.mousePosition.x == 0 || Input.mousePosition.y == 0 || Input.mousePosition.x >= Screen.width - 1 || Input.mousePosition.y >= Screen.height - 1) {
                 return false;
             }
-            #endif
+#endif
             else
             {
                 return true;
@@ -98,13 +98,18 @@ namespace ProBuilder2.Examples
                 dir.x = rot_x;
                 dir.y = rot_y;
                 dir.Normalize();
-            }
-            else
-            {
-                eulerRotation.y += Time.deltaTime * idleRotation * dir.x;
-                eulerRotation.x += Time.deltaTime * Mathf.PerlinNoise(Time.time, 0f) * idleRotation * dir.y;
-            }
 
+                transform.localRotation = Quaternion.Euler(eulerRotation);
+            }
+            // else
+            // {
+            //     eulerRotation.y += Time.deltaTime * idleRotation * dir.x;
+            //     eulerRotation.x += Time.deltaTime * Mathf.PerlinNoise(Time.time, 0f) * idleRotation * dir.y;
+            // }
+            if (!isLockedToTarget)
+                transform.localPosition = transform.localRotation * (Vector3.forward * -distance);
+            else
+                transform.localPosition = transform.localRotation * (Vector3.forward * -distance);
             //drag camera
             if (Input.GetMouseButton(1) && isStarted)
             {
@@ -128,14 +133,16 @@ namespace ProBuilder2.Examples
                     offset.y = 0;
                     targetPoint.transform.position -= offset;
                 }
+
+                transform.localRotation = Quaternion.Euler(eulerRotation);
+                if (!isLockedToTarget)
+                    transform.position = transform.localRotation * (Vector3.forward * -distance);
+                else
+                    transform.position = targetPoint.transform.position + transform.localRotation * (Vector3.forward * -distance);
             }
 
             //update the pos and rotation y base
-            transform.localRotation = Quaternion.Euler(eulerRotation);
-            if (!isLockedToTarget)
-                transform.position = transform.localRotation * (Vector3.forward * -distance);
-            else
-                transform.position = targetPoint.transform.position + transform.localRotation * (Vector3.forward * -distance);
+
 
             //zoom in/ zoom out
             if (Input.GetAxis(INPUT_MOUSE_SCROLLWHEEL) != 0f && isStarted)

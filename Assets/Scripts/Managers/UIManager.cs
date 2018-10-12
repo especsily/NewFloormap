@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
     [SerializeField] private float cameraFinishDistance;
     [SerializeField] private Image startPanel;
     [SerializeField] private float startPanelFadeTime;
+    [SerializeField] private float pivotStartRotationY;
     private GameObject cameraPivot;
 
     void Start()
@@ -79,24 +80,40 @@ public class UIManager : MonoBehaviour, IAnimationUI
         }
     }
 
-    public void StartCameraUI()
+    public IEnumerator StartCameraUI()
     {
         Camera.main.transform.eulerAngles = cameraStartRotation;
         // startRotationY = Camera.main.transform.eulerAngles.y;
         var cameraController = Camera.main.GetComponent<CameraController>();
-        cameraController.idleRotation = Mathf.Floor(cameraFinishRotation - cameraStartRotation.y) / cameraAnimTime;
-        Debug.Log(cameraController.idleRotation);
+        cameraController.idleRotation = 0;
         cameraController.distance = cameraStartDistance;
 
+        // cameraController.targetPoint.transform.rotation = Quaternion.Euler(0, pivotStartRotationY, 0);
+
+        var rotationY = pivotStartRotationY;
+        DOTween.To(() => rotationY, x => rotationY = x, cameraFinishRotation, cameraAnimTime);
+
         startPanel.DOColor(Utilities.ChangeColorAlpha(startPanel.color, 0), startPanelFadeTime).SetDelay(0.3f);
-        DOTween.To(() => cameraController.distance, x => cameraController.distance = x, cameraFinishDistance, cameraAnimTime)    
+
+        var distance = cameraController.distance;
+        DOTween.To(() => distance, x => distance = x, cameraFinishDistance, cameraAnimTime)
         .OnComplete(() =>
         {
-            cameraController.idleRotation = 0;
             cameraController.isStarted = true;
             startPanel.gameObject.SetActive(false);
             AppearFromCenter(cameraController.targetPoint.transform.position);
         });
+
+        while (true)
+        {
+            cameraPivot.transform.localRotation = Quaternion.Euler(0, rotationY, 0);
+            cameraController.distance = distance;
+            if (rotationY >= cameraFinishRotation)
+            {
+                break;
+            }
+            yield return null;
+        }
     }
 
     public void ClickRoomInfo(string id)
@@ -209,7 +226,7 @@ public class UIManager : MonoBehaviour, IAnimationUI
         yield return new WaitUntil(() => spreadsheetManager.GetSpreadSheetData() != null);
         listData = spreadsheetManager.GetSpreadSheetData();
         SetupRoomInfo();
-        StartCameraUI();
+        StartCoroutine(StartCameraUI());
     }
 
     GameObject CreateRoomInfo(Transform parent, GameObject roomInfoPrefab, string info, string roomID)
