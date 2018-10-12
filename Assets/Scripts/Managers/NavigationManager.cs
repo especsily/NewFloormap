@@ -10,7 +10,6 @@ public class NavigationManager : MonoBehaviour, INavigation
     [Header("Data config")]
     [SerializeField] private List<Waypoints> listPath;
     [SerializeField] private List<Floor> listFloor;
-    [SerializeField] private Material highlightMaterial;
     private List<Floor> highlightFloors;
     private Material lastMaterial;
 
@@ -30,7 +29,6 @@ public class NavigationManager : MonoBehaviour, INavigation
     // public float trailEndWidth;
     private float timer;
     private string currentRoomID;
-    private Color lastColor;
     [Header("Floor materials")]
     [SerializeField] private Material wood;
     [SerializeField] private Material denim_blue;
@@ -178,6 +176,7 @@ public class NavigationManager : MonoBehaviour, INavigation
     public void ShowHighlightFloor(string roomID, Color floorColor)
     {
         highlightFloors = listFloor.Where(x => x.roomID.Trim() == roomID.Trim()).ToList();
+        Debug.Log(highlightFloors.Count);
         if (highlightFloors.Count > 0)
         {
             lastMaterial = highlightFloors[0].GetComponent<Floor>().mesh.sharedMaterial;

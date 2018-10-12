@@ -84,12 +84,12 @@ public class UIManager : MonoBehaviour, IAnimationUI
         Camera.main.transform.eulerAngles = cameraStartRotation;
         // startRotationY = Camera.main.transform.eulerAngles.y;
         var cameraController = Camera.main.GetComponent<CameraController>();
-        cameraController.idleRotation = (cameraFinishRotation - cameraStartRotation.y) / cameraAnimTime;
+        cameraController.idleRotation = Mathf.Floor(cameraFinishRotation - cameraStartRotation.y) / cameraAnimTime;
+        Debug.Log(cameraController.idleRotation);
         cameraController.distance = cameraStartDistance;
 
         startPanel.DOColor(Utilities.ChangeColorAlpha(startPanel.color, 0), startPanelFadeTime).SetDelay(0.3f);
-        DOTween.To(() => cameraController.distance, x => cameraController.distance = x, cameraFinishDistance, cameraAnimTime)
-        .SetEase(Ease.Linear)
+        DOTween.To(() => cameraController.distance, x => cameraController.distance = x, cameraFinishDistance, cameraAnimTime)    
         .OnComplete(() =>
         {
             cameraController.idleRotation = 0;
