@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 054c9e4935884a3468ab83226d643c48
+guid: b68c21e7098e46747bf6b9ce252122be
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: solid_wall
+    2100000: plaster_wall
     2300000: //RootNode
     3300000: //RootNode
     4300000: window_r14
@@ -64,7 +64,7 @@ ModelImporter:
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
+    normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
@@ -81,7 +81,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

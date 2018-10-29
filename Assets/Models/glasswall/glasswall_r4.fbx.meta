@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4d7b22a7c6a90ea41b03384d8df4d445
+guid: b94c9b4029503954bbf8cd40128a0844
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -9,6 +9,7 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: wallglass_r4
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -64,8 +65,8 @@ ModelImporter:
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
-    tangentImportMode: 3
+    normalImportMode: 0
+    tangentImportMode: 0
     normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
@@ -81,7 +82,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

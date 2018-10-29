@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: b65b72705e4ac0d47a08e43cbae36e75
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: washing_machine|Circle.001_L_Lib.002|Dupli|5.0.0.0.0.0.0.0.0
+    100004: washing_machine|Circle.002_L_Lib.002|Dupli|1.0.0.0.0.0.0.0.0
+    100006: washing_machine|Cube_L_Lib.002|Dupli|2.0.0.0.0.0.0.0.0
+    100008: washing_machine|Plane.008_L_Lib.002|Dupli|4.0.0.0.0.0.0.0.0
+    100010: washing_machine|Plane.009_L_Lib.002|Dupli|3.0.0.0.0.0.0.0.0
+    100012: washing_machine|Plane.010_L_Lib.002|Dupli|0.0.0.0.0.0.0.0.0
+    400000: //RootNode
+    400002: washing_machine|Circle.001_L_Lib.002|Dupli|5.0.0.0.0.0.0.0.0
+    400004: washing_machine|Circle.002_L_Lib.002|Dupli|1.0.0.0.0.0.0.0.0
+    400006: washing_machine|Cube_L_Lib.002|Dupli|2.0.0.0.0.0.0.0.0
+    400008: washing_machine|Plane.008_L_Lib.002|Dupli|4.0.0.0.0.0.0.0.0
+    400010: washing_machine|Plane.009_L_Lib.002|Dupli|3.0.0.0.0.0.0.0.0
+    400012: washing_machine|Plane.010_L_Lib.002|Dupli|0.0.0.0.0.0.0.0.0
+    2100000: Material.001
+    2100002: Metal-White
+    2100004: Glass
+    2100006: Chrome
+    2300000: washing_machine|Circle.001_L_Lib.002|Dupli|5.0.0.0.0.0.0.0.0
+    2300002: washing_machine|Circle.002_L_Lib.002|Dupli|1.0.0.0.0.0.0.0.0
+    2300004: washing_machine|Cube_L_Lib.002|Dupli|2.0.0.0.0.0.0.0.0
+    2300006: washing_machine|Plane.008_L_Lib.002|Dupli|4.0.0.0.0.0.0.0.0
+    2300008: washing_machine|Plane.009_L_Lib.002|Dupli|3.0.0.0.0.0.0.0.0
+    2300010: washing_machine|Plane.010_L_Lib.002|Dupli|0.0.0.0.0.0.0.0.0
+    3300000: washing_machine|Circle.001_L_Lib.002|Dupli|5.0.0.0.0.0.0.0.0
+    3300002: washing_machine|Circle.002_L_Lib.002|Dupli|1.0.0.0.0.0.0.0.0
+    3300004: washing_machine|Cube_L_Lib.002|Dupli|2.0.0.0.0.0.0.0.0
+    3300006: washing_machine|Plane.008_L_Lib.002|Dupli|4.0.0.0.0.0.0.0.0
+    3300008: washing_machine|Plane.009_L_Lib.002|Dupli|3.0.0.0.0.0.0.0.0
+    3300010: washing_machine|Plane.010_L_Lib.002|Dupli|0.0.0.0.0.0.0.0.0
+    4300000: washing_machine|Plane.010_L_Lib.002|Dupli|0.0.0.0.0.0.0.0.0
+    4300002: washing_machine|Circle.002_L_Lib.002|Dupli|1.0.0.0.0.0.0.0.0
+    4300004: washing_machine|Cube_L_Lib.002|Dupli|2.0.0.0.0.0.0.0.0
+    4300006: washing_machine|Plane.009_L_Lib.002|Dupli|3.0.0.0.0.0.0.0.0
+    4300008: washing_machine|Plane.008_L_Lib.002|Dupli|4.0.0.0.0.0.0.0.0
+    4300010: washing_machine|Circle.001_L_Lib.002|Dupli|5.0.0.0.0.0.0.0.0
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

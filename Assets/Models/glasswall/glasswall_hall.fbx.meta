@@ -1,14 +1,15 @@
 fileFormatVersion: 2
-guid: b5ac4eecc27297246bc0b1943255b5ed
+guid: a635718c0b2ac6d438541add79c1df54
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: glass
+    2100000: plaster_wall
     2300000: //RootNode
     3300000: //RootNode
     4300000: Wallglass_hall
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -64,8 +65,8 @@ ModelImporter:
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
-    tangentImportMode: 3
+    normalImportMode: 0
+    tangentImportMode: 0
     normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
@@ -81,7 +82,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
