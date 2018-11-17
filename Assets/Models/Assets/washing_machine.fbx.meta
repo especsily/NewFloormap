@@ -39,9 +39,10 @@ ModelImporter:
     4300006: washing_machine|Plane.009_L_Lib.002|Dupli|3.0.0.0.0.0.0.0.0
     4300008: washing_machine|Plane.008_L_Lib.002|Dupli|4.0.0.0.0.0.0.0.0
     4300010: washing_machine|Circle.001_L_Lib.002|Dupli|5.0.0.0.0.0.0.0.0
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -94,10 +95,10 @@ ModelImporter:
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
-    tangentImportMode: 3
+    normalImportMode: 0
+    tangentImportMode: 0
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

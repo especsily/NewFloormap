@@ -34,9 +34,10 @@ ModelImporter:
     4300002: stair|BezierCurve_L_Lib|Dupli|2.0.0.0.0.0.0.0.0
     4300004: stair|Cylinder_L_Lib|Dupli|5.0.0.0.0.0.0.0.0
     4300006: stair|Cube_L_Lib|Dupli|6.0.0.0.0.0.0.0.0
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -89,10 +90,10 @@ ModelImporter:
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
-    tangentImportMode: 3
+    normalImportMode: 0
+    tangentImportMode: 0
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

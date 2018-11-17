@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pointer : MonoBehaviour {
-	public SpriteRenderer arrowSprite;
-	public TrailRenderer trail;
+public class Pointer : MonoBehaviour
+{
+  public SpriteRenderer arrowSprite;
+  public TrailRenderer trail;
 
-	public void TurnOffMesh()
-	{
-		arrowSprite.enabled = false;
-		StartCoroutine(WaitThenDestroy(trail.time));
-	}
+  public void TurnOffMesh()
+  {
+    if (!gameObject.activeSelf) return;
 
-	IEnumerator WaitThenDestroy(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-		trail.Clear();
-		gameObject.SetActive(false);
-        // Destroy(this.gameObject);
-    }
+    arrowSprite.enabled = false;
+    StartCoroutine(WaitThenDestroy(trail.time));
+  }
+
+  IEnumerator WaitThenDestroy(float duration)
+  {
+    yield return new WaitForSeconds(duration);
+    trail.Clear();
+    gameObject.SetActive(false);
+    // Destroy(this.gameObject);
+  }
 }
